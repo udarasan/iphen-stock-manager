@@ -1,7 +1,9 @@
 package com.iphentechnologies.stockmanager.service.impl;
 
 import com.iphentechnologies.stockmanager.dto.UserDTO;
+import com.iphentechnologies.stockmanager.dto.UserResponseDTO;
 import com.iphentechnologies.stockmanager.entity.User;
+import com.iphentechnologies.stockmanager.exception.ValidateException;
 import com.iphentechnologies.stockmanager.repo.UserRepo;
 import com.iphentechnologies.stockmanager.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -20,11 +22,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(UserDTO userDTO) {
+        if (userRepo.existsByUserEmail(userDTO.getUserEmail())) {
+            throw new ValidateException("This Email Has Already User Account!");
+        }
         userRepo.save(mapper.map(userDTO, User.class));
     }
 
     @Override
-    public boolean passwordMatchesNic(String email, String password) {
-        return userRepo.getPassword(email).contentEquals(password);
+    public UserResponseDTO passwordMatchesEmail(String userEmail, String userPassword) {
+        if (userRepo.existsByUserEmail(userEmail)) {
+            User all = userRepo.getUser(userEmail);
+            if (all.getUserPassword().equals(userPassword)) {
+                return mapper.map(all, UserResponseDTO.class);
+            } else {
+                throw new ValidateException("Password And Email Missed Matched!");
+            }
+        }
+        throw new ValidateException("No Account For This Email!");
+
     }
 }

@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepo extends JpaRepository<User,String> {
-    @Query(value = "SELECT password FROM User WHERE email=?1", nativeQuery = true)
-    String getPassword(String email);
+
+    @Query(value = "SELECT * FROM User WHERE user_email=?1", nativeQuery = true)
+    User getUser(String email);
+
+    boolean existsByUserEmail(String userEmail);
 }

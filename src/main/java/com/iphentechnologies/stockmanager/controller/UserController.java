@@ -1,7 +1,7 @@
 package com.iphentechnologies.stockmanager.controller;
 
 import com.iphentechnologies.stockmanager.dto.UserDTO;
-import com.iphentechnologies.stockmanager.entity.User;
+import com.iphentechnologies.stockmanager.dto.UserResponseDTO;
 import com.iphentechnologies.stockmanager.service.UserService;
 import com.iphentechnologies.stockmanager.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +23,10 @@ public class UserController {
         return new ResponseEntity(new StandardResponse("201", "Done", userDTO), HttpStatus.CREATED);
     }
     @GetMapping(path = "/login")
-    public ResponseEntity loginUser(@RequestParam String email, @RequestParam String password){
+    public ResponseEntity loginUser(@RequestParam String userEmail, @RequestParam String userPassword){
 
-            if (!userService.passwordMatchesNic(email, password)) {
-                return new ResponseEntity(new StandardResponse("400", "Wrong Password Or Email Address", email), HttpStatus.UNAUTHORIZED);
-            } else {
-                return new ResponseEntity(new StandardResponse("201", "Successfully Login", email), HttpStatus.OK);
-            }
+        UserResponseDTO userResponseDTO = userService.passwordMatchesEmail(userEmail, userPassword);
+        return new ResponseEntity(new StandardResponse("202", "Done", userResponseDTO), HttpStatus.ACCEPTED);
 
     }
 }

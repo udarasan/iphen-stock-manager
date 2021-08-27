@@ -1,8 +1,10 @@
 package com.iphentechnologies.stockmanager.service;
 
 import com.iphentechnologies.stockmanager.dto.UserDTO;
+import com.iphentechnologies.stockmanager.dto.UserResponseDTO;
 
 public interface UserService {
     void addUser(UserDTO userDTO);
-    boolean passwordMatchesNic(String email, String password);
+
+    UserResponseDTO passwordMatchesEmail(String userEmail, String userPassword);
 }
