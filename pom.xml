@@ -26,18 +26,17 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
-		</dependency>-->
+		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>9.4-1205-jdbc42</version>
-		</dependency>
+			<scope>runtime</scope>
+		</dependency>-->
 
 
 		<dependency>
