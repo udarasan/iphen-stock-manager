@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO passwordMatchesEmail(String userEmail, String userPassword) {
+        System.out.println(userEmail+""+userPassword);
         if (userRepo.existsByUserEmail(userEmail)) {
             User all = userRepo.getUser(userEmail);
             if (all.getUserPassword().equals(userPassword)) {
