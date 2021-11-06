@@ -22,9 +22,9 @@ public class UserController {
         userService.addUser(userDTO);
         return new ResponseEntity(new StandardResponse("201", "Done", userDTO), HttpStatus.CREATED);
     }
+
     @GetMapping(path = "/login")
     public ResponseEntity loginUser(@RequestParam String userEmail, @RequestParam String userPassword){
-
         UserResponseDTO userResponseDTO = userService.passwordMatchesEmail(userEmail, userPassword);
         return new ResponseEntity(new StandardResponse("202", "Done", userResponseDTO), HttpStatus.ACCEPTED);
 
